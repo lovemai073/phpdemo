@@ -6,7 +6,7 @@ $jsondata = @file_get_contents("http://opendata.epa.gov.tw/ws/Data/REWXQA/?forma
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>空氣品質即時監測資訊</title>
+	<title>空氣品質即時監測資訊系統</title>
 	
 	<link href="jcss/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">

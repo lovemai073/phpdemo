@@ -1,6 +1,23 @@
 <?php
 $jsondata = @file_get_contents("http://opendata.epa.gov.tw/ws/Data/REWXQA/?format=json");
 //http://opendata.epa.gov.tw/ws/Data/AQX/?format=json
+function array_sort($arr,$keys,$type='asc'){ 
+	$keysvalue = $new_array = array();
+	foreach ($arr as $k=>$v){
+		$keysvalue[$k] = $v[$keys];
+	}
+	if($type == 'asc'){
+		asort($keysvalue);
+	}else{
+		arsort($keysvalue);
+	}
+		reset($keysvalue);
+	foreach ($keysvalue as $k=>$v){
+		$new_array[$k] = $arr[$k];
+	}
+
+	return $new_array; 
+} 
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,6 +27,20 @@ $jsondata = @file_get_contents("http://opendata.epa.gov.tw/ws/Data/REWXQA/?forma
 	
 	<link href="jcss/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
+	*{font-family: 'cwTeXHei', serif;}
+	@font-face {
+	  font-family: 'cwTeXHei';
+	  font-style: normal;
+	  font-weight: 500;
+	  src: url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.eot);
+	  src: url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.eot?#iefix) format('embedded-opentype'),
+	       url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.woff2) format('woff2'),
+	       url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.woff) format('woff'),
+	       url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.ttf) format('truetype');
+	}
+	table{
+		font-size: 10px;
+	}
 	th{
 		background-color: #2B5F75;
 		color: #FFFFFF;
@@ -55,6 +86,7 @@ $jsondata = @file_get_contents("http://opendata.epa.gov.tw/ws/Data/REWXQA/?forma
 			<?php
 			if($jsondata){
 				$mydata=json_decode($jsondata,True);
+				$mydata=array_sort($mydata,'County',"DESC");
 				foreach ($mydata as $key => $vv) {
 					if($vv["PM2.5"]>35){
 						$tablecontent.='<tr class="danger">';
@@ -98,10 +130,13 @@ $jsondata = @file_get_contents("http://opendata.epa.gov.tw/ws/Data/REWXQA/?forma
 
 <script src="jcss/jquery-1.12.0.min.js"></script>
 <script src="jcss/bootstrap.min.js"></script>
+<script src="jcss/jquery.tablesorter.js"></script>
+
 <script type="text/javascript">
 	$(function() {
 		//getresult();
 		window.setInterval(getresult, 3000);
+		$("#mydata").tablesorter();
 	});
 	function getresult(){
 		$.ajax({

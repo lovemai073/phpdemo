@@ -53,7 +53,7 @@ function array_sort($arr,$keys,$type='asc'){
 <body>
 
 <div id="container">
-	<h1>空氣品質即時監測資訊</h1>
+	<h1>2/24空氣品質即時監測資訊</h1>
 	<div id="body">
 	<blockquote>
 		<p>PM2.5年平均值為15，24小時平均值為35</p>

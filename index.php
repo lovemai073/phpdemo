@@ -23,7 +23,7 @@ function array_sort($arr,$keys,$type='asc'){
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>空氣品質即時監測資訊系統</title>
+	<title>2/24空氣品質即時監測資訊系統</title>
 	
 	<link href="jcss/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
